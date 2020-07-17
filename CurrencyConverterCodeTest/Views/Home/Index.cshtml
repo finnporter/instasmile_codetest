@@ -1,0 +1,39 @@
+﻿@model CurrencyConverterCodeTest.Models.CurrencyConverterModel
+@{
+    ViewBag.Title = "Currency Calculator";
+}
+
+    <div class="jumbotron">
+        <h1>Currency Calculator</h1>
+        <p class="lead">Convert the Currency</p>
+
+        <div class="row">
+            @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { @class = "form" }))
+            {
+                <div class="col-md-4">
+                    @Html.TextBoxFor(x => x.Amount, new { min = 0, type = "number", step = 0.01 })
+                </div>
+                <div class="col-md-2">
+                    @Html.DropDownListFor(x => x.FromCurrency, Model.CurrencyOptions)
+                </div>
+                <div class="col-md-2">
+                    <span>convert to</span>
+                </div>
+                <div class="col-md-2">
+                    @Html.DropDownListFor(x => x.ToCurrency, Model.CurrencyOptions)
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-primary">Convert</button>
+                </div>
+            }
+
+        </div>
+        @if (Model.ShowResult)
+        {
+            <div class="row">
+                <div class="col-md-4">
+                    @Model.Amount @Model.FromCurrency = @Model.Result @Model.ToCurrency
+                </div>
+            </div>
+        }
+    </div>
